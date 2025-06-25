@@ -1,20 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// Importando suas telas
+import EnderecoScreen from './screens/EnderecoScreen';
+import PedidoScreen from './screens/PedidoScreen';
+import ResumoScreen from './screens/ResumoScreen';
+import PagamentoScreen from './screens/PagamentoScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Endereco"
+        screenOptions={{
+          headerStyle: { backgroundColor: '#DD7B21' },
+          headerTintColor: '#fff',
+          headerTitleAlign: 'center',
+          headerTitleStyle: { fontWeight: 'bold' },
+        }}
+      >
+        <Stack.Screen
+          name="Endereco"
+          component={EnderecoScreen}
+          options={{ title: 'Coloque seu Endereço' }}
+        />
+        <Stack.Screen
+          name="Pedido"
+          component={PedidoScreen}
+          options={{ title: 'Monte sua Pizza' }}
+        />
+        <Stack.Screen
+          name="Resumo"
+          component={ResumoScreen}
+          options={{ title: 'Resumo do Pedido' }}
+        />
+        <Stack.Screen
+          name="Pagamento"
+          component={PagamentoScreen}
+          options={{ title: 'Pagamento' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
